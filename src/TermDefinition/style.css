@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&display=swap");
+
+.container {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.static {
+  opacity: 0.11;
+}
+
+.word {
+  font-size: 40px;
+  margin-left: 8px;
+  font-family: Inter;
+  font-weight: 300;
+  color: rgba(256, 256, 256, 0.8);
+  position: relative;
+  display: inline-block;
+}
+
+.term {
+  position: absolute;
+  color: white;
+  font-weight: 800;
+  font-size: 160px;
+  letter-spacing: -0.05em;
+  margin-top: 40%;
+  margin-left: calc(42% - 100px); 
+  -webkit-font-smoothing: antialiased;
+  color: plum;
+}
+
+.vertical-line {
+  /* width: 2px;
+  height: 50px;
+  background: white; */
+  margin-bottom: 50px;
+  margin-left: 5%;
+}
+
+.dancing-word {
+  margin-right: 8px;
+}

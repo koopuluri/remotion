@@ -1,5 +1,6 @@
 import {Composition} from 'remotion';
 import {HelloWorld} from './HelloWorld';
+import { TermDefinition } from './TermDefinition/TermDefinition';
 import {Logo} from './HelloWorld/Logo';
 
 // Each <Composition> is an entry in the sidebar!
@@ -7,6 +8,21 @@ import {Logo} from './HelloWorld/Logo';
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="TermDefinition"
+				component={TermDefinition}
+				durationInFrames={400}
+				fps={30}
+				width={1920}
+				height={1080}
+				defaultProps={{
+					term: "ECONOMY",
+					definition: [
+						"The management of the resources of a community or an individual with a view t.",
+						"An economic system is a system of production, resource allocation"
+					]
+				}}
+			/>
 			<Composition
 				// You can take the "id" to render a video:
 				// npx remotion render src/index.ts <id> out/video.mp4
