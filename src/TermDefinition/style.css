@@ -30,8 +30,7 @@
   margin-top: 40%;
   margin-left: calc(42% - 100px); 
   -webkit-font-smoothing: antialiased;
-  color: plum;
-}
+  }
 
 .vertical-line {
   /* width: 2px;
