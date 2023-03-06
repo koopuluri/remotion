@@ -8,20 +8,7 @@ import {
 } from 'remotion';
 import { DancingWord } from './DancingWord';
 
-const Letter = (props: { letter: string; index: number; }) => {
-  const frame = useCurrentFrame();
-  const {durationInFrames, fps} = useVideoConfig();
-
-  // Wiggle side to side:
-  return (
-    <span
-      className="letter"
-      style={{
-      }}>
-        {props.letter}
-    </span>
-  )
-}
+import { evolvePath, interpolatePath } from "@remotion/paths";
 
 // TODO:
 // https://codepen.io/zerospree/pen/GRmBga -> give each character a jitter.
@@ -78,14 +65,31 @@ const VerticalLine = (props: {delay: number}) => {
     easing: Easing.bezier(0.12, 0.55, 0.79, 0.94),
   });
 
+//  let path = "M11.0001 18.5858V3H13.0001V18.5858L19.293 12.2929L20.7072 13.7071L12.0001 22.4142L3.29297 13.7071L4.70718 12.2929L11.0001 18.5858Z"
+  let path = "M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883"
+
+  let progress = spring({
+		frame: frame,
+		fps,
+		config: {
+			damping: 100,
+		},
+	});
+
+  const evolution = evolvePath(progress, path)
+  
   return (
     <div 
       style={{ transform: `translateY(${translateY}px)`}}
       className="vertical-line">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="48" height="55" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <g id="24 / arrows / arrow-bottom">
-          <path id="icon" fill-rule="evenodd" clip-rule="evenodd" d="M11.0001 18.5858V3H13.0001V18.5858L19.293 12.2929L20.7072 13.7071L12.0001 22.4142L3.29297 13.7071L4.70718 12.2929L11.0001 18.5858Z" 
-            fill="white"/>
+          <path
+            id="icon" 
+            d={path} 
+            strokeDasharray={evolution.strokeDasharray}
+            strokeDashoffset={evolution.strokeDashoffset}
+          />
           </g>
         </svg>
     </div>
