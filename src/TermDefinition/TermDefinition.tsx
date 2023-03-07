@@ -11,6 +11,7 @@ import { Term } from "./Term"
 
 import "./style.css"
 import { Sentence } from '../Base/Text/Sentence';
+import { Grid } from './Grid';
 
 // This animation is used to define a term. 
 // A term definition requires:
@@ -35,10 +36,21 @@ export const TermDefinition = (props: {
   definition: string[]
 }) => { 
   const frame = useCurrentFrame();
-  const {durationInFrames, fps} = useVideoConfig();
+  const {durationInFrames, fps, height, width} = useVideoConfig();
+
+  let startHeight = height/6;
+  let endHeight = height / 10;
+
+  let compressStartAt = 60 + props.definition[0].split(" ").length*3 + 40;
 
   return (
     <AbsoluteFill className="container">
+      <Grid 
+        cellWidth={width/16} 
+        cellHeight={height/6} 
+        collapseAt={compressStartAt} 
+        collapseToHeight={endHeight} 
+      />
       <img 
         className="static" src="https://d3n32ilufxuvd1.cloudfront.net/5fcb8cb7333e1d00c3e8bd52/3366588/upload-0a220bbd-7883-41ad-b62f-63b330ff6a39.gif">
       </img>
@@ -46,10 +58,10 @@ export const TermDefinition = (props: {
         <Term term={props.term} />
       </Sequence>
       <Sequence from={60}>
-          <Sentence sentence={props.definition[0]} index={0}/>
+          <Sentence sentence={props.definition[0]} index={0} collapseAt={compressStartAt - 60}/>
       </Sequence>
       <Sequence from={60 + props.definition[0].split(" ").length*3}>
-          <Sentence sentence={props.definition[1]} index={1}/>
+          <Sentence sentence={props.definition[1]} index={1} collapseAt={compressStartAt - 100}/>
       </Sequence>
     </AbsoluteFill>
   );

@@ -13,7 +13,7 @@ import { DownArrow } from '../../TermDefinition/DownArrow';
 // https://codepen.io/zerospree/pen/GRmBga -> give each character a jitter.
 // https://codepen.io/wagerfield/pen/AxGbVz
 // https://codepen.io/soulwire/pen/mEMPrK -> Only for the title, the caption should appear as it does.
-const SlideIn = (props: { children: any; index: number; }) => {
+const SlideIn = (props: { index: number; children: any;  }) => {
   const frame = useCurrentFrame();
   const {durationInFrames, fps} = useVideoConfig();
 
@@ -56,7 +56,10 @@ const SlideIn = (props: { children: any; index: number; }) => {
 export const Sentence = (props: {
   sentence: string;
   index: number;
+  collapseAt: number;
 }) => {
+
+  let frame = useCurrentFrame()
 
   let words = props.sentence.split(" ");
   let wordComponents = words.map((word, index) => {
@@ -67,6 +70,20 @@ export const Sentence = (props: {
     )
   })
 
+  let progress = spring({
+    frame: frame - props.collapseAt,
+    fps: 30,
+    config: {
+      damping: 100,
+    },
+  });
+
+  let translateY = interpolate(
+    progress,
+    [0, 1],
+    [0, -props.index*100 - 130]  
+  )
+
   // Want to let each word appear on its own timeline:
   // Each word will take 10 frames to appear.
   // => this Sequence will take 10 * words.length frames to complete
@@ -76,8 +93,10 @@ export const Sentence = (props: {
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: 400 + (props.index * 200),
+      transform: `translateY(${translateY}px)`,
     }}>
-      <DownArrow delay={0}/>
+
+      <DownArrow delay={0} visible={frame < props.collapseAt} />
       {wordComponents}
     </div>
   )

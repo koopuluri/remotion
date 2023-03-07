@@ -1,7 +1,7 @@
 import { useCurrentFrame, useVideoConfig, Easing, interpolate, spring } from "remotion";
 import { evolvePath } from "@remotion/paths";
 
-export const DownArrow = (props: {delay: number}) => {
+export const DownArrow = (props: {delay: number; visible: boolean;}) => {
 
   const frame = useCurrentFrame();
   const {durationInFrames, fps} = useVideoConfig();
@@ -28,7 +28,7 @@ export const DownArrow = (props: {delay: number}) => {
   
   return (
     <div 
-      style={{ transform: `translateY(${translateY}px)`}}
+      style={{ transform: `translateY(${translateY}px)`, visibility: props.visible ? "visible" : "hidden"}}
       className="vertical-line">
         <svg width="48" height="55" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <g id="24 / arrows / arrow-bottom">
