@@ -12,6 +12,7 @@ import { Term } from "./Term"
 import "./style.css"
 import { Sentence } from '../Base/Text/Sentence';
 import { Grid } from './Grid';
+import { Highlight } from '../Base/Highlight/Highlight';
 
 // This animation is used to define a term. 
 // A term definition requires:
@@ -62,6 +63,9 @@ export const TermDefinition = (props: {
       </Sequence>
       <Sequence from={60 + props.definition[0].split(" ").length*3}>
           <Sentence sentence={props.definition[1]} index={1} collapseAt={compressStartAt - 100}/>
+      </Sequence>
+      <Sequence from={60 + props.definition[0].split(" ").length*3 + 87}>
+          <Highlight height={200} width={900} top={147} left={550} />
       </Sequence>
     </AbsoluteFill>
   );
