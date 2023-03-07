@@ -10,7 +10,7 @@ import {
 import { Term } from "./Term"
 
 import "./style.css"
-import { Sentence } from './Text/Sentence';
+import { Sentence } from '../Base/Text/Sentence';
 
 // This animation is used to define a term. 
 // A term definition requires:

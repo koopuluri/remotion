@@ -6,8 +6,6 @@ const DancingCharacter = (props: {character: string, index: number}) => {
   // Only animate every 10 frames (i.e. thrice per second)
   let frame = Math.floor(useCurrentFrame() / 10) * 10;
 
-  const {durationInFrames, fps} = useVideoConfig();
-
   const skewAnimation = Math.cos(0.1 * frame)
   let skew = interpolate(skewAnimation, [-1, 1], [-2, 2]);
 

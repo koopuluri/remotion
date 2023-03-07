@@ -6,7 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import { DancingWord } from './Text/DancingWord';
+import { DancingWord } from '../Base/Text/DancingWord';
 
 export const Term = (props: {term: string}) => {
   const frame = useCurrentFrame();
